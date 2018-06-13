@@ -31,6 +31,10 @@ spec:
             value: /data
           # - name: DBENCH_QUICK
           #   value: "yes"
+          # - name: FIO_SIZE
+          #   value: 1G
+          # - name: FIO_OFFSET_INCREMENT
+          #   value: 256M
         volumeMounts:
         - name: dbench-pv
           mountPath: /data
