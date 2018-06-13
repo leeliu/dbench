@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env sh
 set -e
 
 if [ "$DBENCH_MOUNTPOINT" == "" ]; then
