@@ -1,9 +1,6 @@
-FROM ubuntu
+FROM dmonakhov/alpine-fio
 
 MAINTAINER Lee Liu <lee@logdna.com>
-
-RUN apt-get update && apt-get install -y \
-    fio
 
 VOLUME /tmp
 WORKDIR /tmp
