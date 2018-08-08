@@ -32,6 +32,7 @@ Mixed Random Read/Write IOPS: 43.1k/14.4k
 ## Contributors
 
 * Lee Liu (LogDNA)
+* [Alexis Turpin](https://github.com/alexis-turpin)
 
 ## License
 
