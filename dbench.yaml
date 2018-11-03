@@ -36,7 +36,7 @@ spec:
           # - name: FIO_OFFSET_INCREMENT
           #   value: 256M
           # - name: FIO_DIRECT
-          #   value: 0
+          #   value: "0"
         volumeMounts:
         - name: dbench-pv
           mountPath: /data
