@@ -24,7 +24,7 @@ spec:
     spec:
       containers:
       - name: dbench
-        image: logdna/dbench:latest
+        image: ndrpnt/dbench:1.0.0
         imagePullPolicy: Always
         env:
           - name: DBENCH_MOUNTPOINT
