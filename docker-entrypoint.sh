@@ -14,7 +14,7 @@ if [ -z $FIO_OFFSET_INCREMENT ]; then
 fi
 
 if [ -z $WRITE_BS ]; then
-    WRITE_BS=512
+    WRITE_BS=4k
 fi
 
 if [ -z $FIO_DIRECT ]; then
