@@ -1,9 +1,31 @@
-FROM dmonakhov/alpine-fio
+FROM alpine
 
-MAINTAINER Lee Liu <lee@logdna.com>, Hoon Jo <pagaia@hotmail.com>
+MAINTAINER Dmitry Monakhov dmonakhov@openvz.org
 
-# add due to grep -P doesn't support on alpine
-apk add --no-cache --upgrade grep
+# Install build deps + permanent dep: libaio
+RUN apk --no-cache add \
+    	make \
+    	alpine-sdk \
+    	zlib-dev \
+    	libaio-dev \
+    	linux-headers \
+	    coreutils \
+      grep \
+    	libaio && \
+    git clone https://github.com/axboe/fio && \
+    cd fio && \
+    ./configure && \
+    make -j`nproc` && \
+    make install && \
+    cd .. && \
+    rm -rf fio && \
+    apk --no-cache del \
+    	make \
+    	alpine-sdk \
+    	zlib-dev \
+    	libaio-dev \
+    	linux-headers \
+    	coreutils
 
 VOLUME /tmp
 WORKDIR /tmp
