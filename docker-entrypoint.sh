@@ -55,7 +55,7 @@ if [ "$1" = 'fio' ]; then
         READ_LATENCY=$(fio --randrepeat=0 --verify=0 --ioengine=libaio --direct=$FIO_DIRECT --name=read_latency --filename=$DBENCH_MOUNTPOINT/fiotest --bs=4K --iodepth=4 --size=$FIO_SIZE --readwrite=randread --time_based --ramp_time=2s --runtime=15s)
         echo "$READ_LATENCY"
         READ_LATENCY_VAL=$(echo "$READ_LATENCY"|grep ' lat.*avg'|grep -Eoi 'avg=[\b 0-9.]+'|cut -d'=' -f2)
-        READ_LATENCY_KEY=$(echo "$READ_LATENCY"|grep ' lat.*avg'|grep -oP '(?<=lat )[^ ]*' |grep -Eoi '[a-z]+'
+        READ_LATENCY_KEY=$(echo "$READ_LATENCY"|grep ' lat.*avg'|grep -oP '(?<=lat )[^ ]*' |grep -Eoi '[a-z]+')
         echo
         echo
 
@@ -63,7 +63,7 @@ if [ "$1" = 'fio' ]; then
         WRITE_LATENCY=$(fio --randrepeat=0 --verify=0 --ioengine=libaio --direct=$FIO_DIRECT --name=write_latency --filename=$DBENCH_MOUNTPOINT/fiotest --bs=4K --iodepth=4 --size=$FIO_SIZE --readwrite=randwrite --time_based --ramp_time=2s --runtime=15s)
         echo "$WRITE_LATENCY"
         WRITE_LATENCY_VAL=$(echo "$WRITE_LATENCY"|grep ' lat.*avg'|grep -Eoi 'avg=[\b 0-9.]+'|cut -d'=' -f2)
-        WRITE_LATENCY_KEY=$(echo "$WRITE_LATENCY"|grep ' lat.*avg'|grep -oP '(?<=lat )[^ ]*' |grep -Eoi '[a-z]+'
+        WRITE_LATENCY_KEY=$(echo "$WRITE_LATENCY"|grep ' lat.*avg'|grep -oP '(?<=lat )[^ ]*' |grep -Eoi '[a-z]+')
         echo
         echo
 
