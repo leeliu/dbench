@@ -95,9 +95,9 @@ if [ "$1" = 'fio' ]; then
     echo ==================
     echo "Random Read/Write IOPS: $READ_IOPS_VAL/$WRITE_IOPS_VAL. BW: $READ_BW_VAL / $WRITE_BW_VAL"
     if [ -z $DBENCH_QUICK ] || [ "$DBENCH_QUICK" == "no" ]; then
-        echo "Average Latency (usec) Read/Write: $READ_LATENCY_VAL/$WRITE_LATENCY_VAL"
+        echo "Average Latency (usec) Read/Write: $READ_LATENCY_VAL / $WRITE_LATENCY_VAL"
         echo "Sequential Read/Write: $READ_SEQ_VAL / $WRITE_SEQ_VAL"
-        echo "Mixed Random Read/Write IOPS: $RW_MIX_R_IOPS/$RW_MIX_W_IOPS"
+        echo "Mixed Random Read/Write IOPS: $RW_MIX_R_IOPS / $RW_MIX_W_IOPS"
     fi
 
     rm $DBENCH_MOUNTPOINT/fiotest
