@@ -55,7 +55,7 @@ if [ "$1" = 'fio' ]; then
         READ_LATENCY=$(fio --randrepeat=0 --verify=0 --ioengine=libaio --direct=$FIO_DIRECT --name=read_latency --filename=$DBENCH_MOUNTPOINT/fiotest --bs=4K --iodepth=4 --size=$FIO_SIZE --readwrite=randread --time_based --ramp_time=2s --runtime=15s)
         echo "$READ_LATENCY"
         READ_LATENCY_VAL=$(echo "$READ_LATENCY"|grep ' lat.*avg'|grep -Eoi 'avg=[\b 0-9.]+'|cut -d'=' -f2)
-        READ_LATENCY_KEY=$(echo "$READ_LATENCY"|grep ' lat.*avg'|grep -oP '(?<=lat )[^ ]*' |grep -Eoi '[a-z]+')
+        READ_LATENCY_UNIT=$(echo "$READ_LATENCY"|grep ' lat.*avg'|grep -oP '(?<=lat )[^ ]*'|grep -Eoi '[a-z]+')
         echo
         echo
 
@@ -63,7 +63,7 @@ if [ "$1" = 'fio' ]; then
         WRITE_LATENCY=$(fio --randrepeat=0 --verify=0 --ioengine=libaio --direct=$FIO_DIRECT --name=write_latency --filename=$DBENCH_MOUNTPOINT/fiotest --bs=4K --iodepth=4 --size=$FIO_SIZE --readwrite=randwrite --time_based --ramp_time=2s --runtime=15s)
         echo "$WRITE_LATENCY"
         WRITE_LATENCY_VAL=$(echo "$WRITE_LATENCY"|grep ' lat.*avg'|grep -Eoi 'avg=[\b 0-9.]+'|cut -d'=' -f2)
-        WRITE_LATENCY_KEY=$(echo "$WRITE_LATENCY"|grep ' lat.*avg'|grep -oP '(?<=lat )[^ ]*' |grep -Eoi '[a-z]+')
+        WRITE_LATENCY_UNIT=$(echo "$WRITE_LATENCY"|grep ' lat.*avg'|grep -oP '(?<=lat )[^ ]*'|grep -Eoi '[a-z]+')
         echo
         echo
 
@@ -97,7 +97,7 @@ if [ "$1" = 'fio' ]; then
     echo ==================
     echo "Random Read/Write IOPS: $READ_IOPS_VAL/$WRITE_IOPS_VAL. BW: $READ_BW_VAL / $WRITE_BW_VAL"
     if [ -z $DBENCH_QUICK ] || [ "$DBENCH_QUICK" == "no" ]; then
-      echo "Average Latency Read/Write: ($READ_LATENCY_KEY)$READ_LATENCY_VAL / ($WRITE_LATENCY_KEY)$WRITE_LATENCY_VAL"
+      echo "Average Latency Read/Write: $READ_LATENCY_VAL($READ_LATENCY_UNIT) / $WRITE_LATENCY_VAL($WRITE_LATENCY_UNIT")
       echo "Sequential Read/Write: $READ_SEQ_VAL / $WRITE_SEQ_VAL"
       echo "Mixed Random Read/Write IOPS: $RW_MIX_R_IOPS / $RW_MIX_W_IOPS"
     fi
