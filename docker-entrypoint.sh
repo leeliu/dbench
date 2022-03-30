@@ -92,14 +92,17 @@ if [ "$1" = 'fio' ]; then
 
     echo All tests complete.
     echo
-    echo ==================
-    echo = Dbench Summary =
-    echo ==================
-    echo "Random Read/Write IOPS: $READ_IOPS_VAL/$WRITE_IOPS_VAL. BW: $READ_BW_VAL / $WRITE_BW_VAL"
+    echo =============================
+    echo = Kubernetes Dbench Summary =
+    echo =============================
+    echo -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+    echo -e "|| Random Read/Write IOPS\t | $READ_IOPS_VAL / $WRITE_IOPS_VAL\t ||" 
+    echo -e "|| Bandwidth Read/Write\t | $READ_BW_VAL / $WRITE_BW_VAL\t ||"
     if [ -z $DBENCH_QUICK ] || [ "$DBENCH_QUICK" == "no" ]; then
-      echo "Average Latency Read/Write: $READ_LATENCY_VAL($READ_LATENCY_UNIT) / $WRITE_LATENCY_VAL($WRITE_LATENCY_UNIT)"
-      echo "Sequential Read/Write: $READ_SEQ_VAL / $WRITE_SEQ_VAL"
-      echo "Mixed Random Read/Write IOPS: $RW_MIX_R_IOPS / $RW_MIX_W_IOPS"
+      echo -e "|| Average Latency Read/Write\t | $READ_LATENCY_VAL($READ_LATENCY_UNIT) / $WRITE_LATENCY_VAL($WRITE_LATENCY_UNIT)\t ||"
+      echo -e "|| Sequential Read/Write\t | $READ_SEQ_VAL / $WRITE_SEQ_VAL\t ||"
+      echo -e "|| Mixed Random Read/Write IOPS\t | $RW_MIX_R_IOPS / $RW_MIX_W_IOPS\t ||"
+    echo -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
     fi
 
     rm $DBENCH_MOUNTPOINT/fiotest
