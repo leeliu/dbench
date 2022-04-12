@@ -1,48 +1,55 @@
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: dbench-pv-claim
+  name: kdbench-pv-claim
+  labels:
+    fio: kdbench
 spec:
-  storageClassName: ssd
-  # storageClassName: gp2
-  # storageClassName: local-storage
-  # storageClassName: ibmc-block-bronze
-  # storageClassName: ibmc-block-silver
-  # storageClassName: ibmc-block-gold
+  storageClassName: your-storageclass
+  # storageClassName: managed-nfs-storage 
+  # storageClassName: gp2 
+  # storageClassName: default 
+  # storageClassName: standard 
+  # storageClassName: nks-block-storage
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 1000Gi
+      storage: 100Gi
 ---
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: dbench
+  name: kdbench
+  labels:
+    fio: kdbench
 spec:
+  ttlSecondsAfterFinished: 0
   template:
     spec:
       containers:
-      - name: dbench
-        image: logdna/dbench:latest
+      - name: kdbench
+        image: sysnet4admin/kdbench:latest
         imagePullPolicy: Always
         env:
-          - name: DBENCH_MOUNTPOINT
-            value: /data
-          # - name: DBENCH_QUICK
+          - name: KDBENCH_MOUNTPOINT
+            value: /ON-your-storageclass
+          - name: STORAGECLASS
+            value: your-storageclass
+          # - name: KDBENCH_QUICK
           #   value: "yes"
           # - name: FIO_SIZE
           #   value: 1G
           # - name: FIO_OFFSET_INCREMENT
           #   value: 256M
           # - name: FIO_DIRECT
-          #   value: "0"
+          #   value: "1"
         volumeMounts:
-        - name: dbench-pv
-          mountPath: /data
+        - name: kdbench-pv
+          mountPath: /ON-your-storageclass
       restartPolicy: Never
       volumes:
-      - name: dbench-pv
+      - name: kdbench-pv
         persistentVolumeClaim:
-          claimName: dbench-pv-claim
+          claimName: kdbench-pv-claim
   backoffLimit: 4
