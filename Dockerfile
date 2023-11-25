@@ -1,6 +1,6 @@
-FROM dmonakhov/alpine-fio
+FROM quay.io/abkumar/alpine-fio
 
-MAINTAINER Lee Liu <lee@logdna.com>
+MAINTAINER abkumar
 
 VOLUME /tmp
 WORKDIR /tmp
