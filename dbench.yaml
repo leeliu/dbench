@@ -29,8 +29,8 @@ spec:
         env:
           - name: DBENCH_MOUNTPOINT
             value: /data
-          # - name: DBENCH_QUICK
-          #   value: "yes"
+          - name: DBENCH_QUICK
+            value: "yes"
           # - name: FIO_SIZE
           #   value: 1G
           # - name: FIO_OFFSET_INCREMENT
